@@ -1,0 +1,41 @@
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1 0 0
+{"letters": {"streak": 0, "wins": 0}, "numbers": {"streak": 0, "wins": 1}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 100 0 0
+{"letters": {"streak": 8, "wins": 31}, "numbers": {"streak": 17, "wins": 66}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 100 10 0
+{"letters": {"streak": 8, "wins": 30}, "numbers": {"streak": 17, "wins": 68}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 100 0 10
+{"letters": {"streak": 7, "wins": 29}, "numbers": {"streak": 17, "wins": 71}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1000 0 100
+{"letters": {"streak": 22, "wins": 234}, "numbers": {"streak": 70, "wins": 753}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1000 100 0
+{"letters": {"streak": 25, "wins": 285}, "numbers": {"streak": 62, "wins": 691}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1000000 0 0
+{"letters": {"streak": 751, "wins": 218468}, "numbers": {"streak": 2596, "wins": 767494}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1000000 1000 0
+{"letters": {"streak": 923, "wins": 295682}, "numbers": {"streak": 2036, "wins": 682547}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1000000 0 1000
+{"letters": {"streak": 784, "wins": 234920}, "numbers": {"streak": 2423, "wins": 750185}}
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py
+usage: main.py [-h] num_challenges prime_likelihood vowels_likelihood
+main.py: error: too few arguments
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py -1 0 0
+No challenges to process
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1 -1 0
+prime_liklihood needs to be a positive integer
+
+C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1 0 -1
+vowel liklihood needs to be a negative integer
+
+

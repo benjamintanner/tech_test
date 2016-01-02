@@ -191,7 +191,7 @@ if __name__ == '__main__':
 
     args = arg_parser.parse_args()
 
-    if args.num_challenges == 0:
+    if args.num_challenges <= 0:
         sys.exit("No challenges to process")
 
     if args.prime_likelihood < 0:

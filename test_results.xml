@@ -1,0 +1,10 @@
+<testsuite errors="0" failures="0" name="" tests="8" time="227.044">
+<testcase classname="__main__.TestNumberOutput" name="test_filled_array" time="0.001"/>
+<testcase classname="__main__.TestNumberOutput" name="test_generate" time="196.113"/>
+<testcase classname="__main__.TestNumberOutput" name="test_is_prime" time="0.000"/>
+<testcase classname="__main__.TestNumberOutput" name="test_is_square" time="0.000"/>
+<testcase classname="__main__.TestNumberOutput" name="test_weighted_array" time="0.001"/>
+<testcase classname="__main__.TestLetterOutput" name="test_fill_dictionary" time="0.000"/>
+<testcase classname="__main__.TestLetterOutput" name="test_generate" time="30.929"/>
+<testcase classname="__main__.TestLetterOutput" name="test_weighted_array" time="0.000"/>
+</testsuite>

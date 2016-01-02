@@ -1,3 +1,5 @@
+It doesn't appear from the results below that we can alter the probablies enough to overcome the advantage that number has. The number of challenges doesn't always equal the total of wins, due to ties that don't show up in the results. 
+
 C:\Users\bentanne\PycharmProjects\tech_test>python main.py 1 0 0
 {"letters": {"streak": 0, "wins": 0}, "numbers": {"streak": 0, "wins": 1}}
 

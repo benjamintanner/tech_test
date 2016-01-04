@@ -8,7 +8,24 @@ import math
 import string
 import json
 
-class NUMBERS (object):
+
+
+class BASE (object):
+    def select(self,container, weights):
+        total_weight = float(sum(weights))
+        rel_weight = [w / total_weight for w in weights]
+
+        # Probability for each element
+        if(self.probs == None):
+            self.probs = [sum(rel_weight[:i + 1]) for i in range(len(rel_weight))]
+
+        for (i, element) in enumerate(container):
+            if random.random() <= self.probs[i]:
+                break
+
+        return element
+
+class NUMBERS (BASE):
     def __init__(self,prime_weight):
         self.primes= []
         self.non_primes= []
@@ -16,6 +33,9 @@ class NUMBERS (object):
         self.weight= prime_weight
         self.weighted_array= []
         self.fill_arrays()
+        self.current_value=0
+        self.probs=None
+
 
     def is_prime_number(self,x):
         if x >= 2:
@@ -37,6 +57,7 @@ class NUMBERS (object):
         Sort 1-99 into 3 lists primes, squares, non primes
         Do this once
         '''
+
         for i in range(1,100):
             if self.is_prime_number(i):
                 self.primes.append(i)
@@ -45,82 +66,54 @@ class NUMBERS (object):
             else:
                 self.non_primes.append(i)
 
-    def weighted_random_selection(self):
-        '''
-        Create a weighted random selection and return either prime, square or non_prime
-        Prime = is three times more likely then square and "prime_weight" more likely then non prime.
-        '''
-
-        if not self.weighted_array:
-            #if empty create it
-            SQUARE_WEIGHT = 3
-            if self.weight == 0:
-                # [prime] [prime] [prime] [square] [non prime] [non prime] [non prime]
-                self.weighted_array= ['prime'] * SQUARE_WEIGHT + ['square'] + ['non_prime'] * SQUARE_WEIGHT
-            else:
-                self.weighted_array= ['square'] * self.weight  + ['prime'] * (self.weight * SQUARE_WEIGHT)  + ['non_prime'] * SQUARE_WEIGHT
-
-        return random.choice(self.weighted_array)
-
     def generate(self):
         '''
         Based on weighted random selection, pick a random from the correct list
         :return
         '''
-        selection= self.weighted_random_selection()
+        selection= self.select(['prime','square','non_prime'],[self.weight,self.weight/3,1])
         if selection == 'prime':
-            result= random.choice(self.primes)
+            self.current_value= random.choice(self.primes)
         elif selection == 'square':
-            result= random.choice(self.squares)
+            self.current_value= random.choice(self.squares)
         else:
-            result= random.choice(self.non_primes)
-        return result
+            self.current_value= random.choice(self.non_primes)
+        return self.current_value
 
-class LETTERS(object):
+class LETTERS(BASE):
     def __init__(self,weight):
         self.letter_dictionary= {}
         self.vowel_dictionary= {}
         self.weight = weight
         self.weighted_array= []
+        self.current_value=0
+        self.probs=None
+        self.vowels= 'a','e','i','o','u'
+        self.y_weight=2
         self.fill_dictionary()
 
     def fill_dictionary(self):
-        vowels = 'a','e','i','o','u'
+
         for i in list(string.ascii_lowercase):
-            if(i in vowels):
+            if(i in self.vowels):
                 self.vowel_dictionary.update({string.ascii_lowercase.index(i)+1:i})
             elif(i != 'y'):
                 self.letter_dictionary.update({string.ascii_lowercase.index(i)+1:i})
-
-    def weighted_random_selection(self):
-        '''
-        Create a weighted random selection and return either wowels, consonants or Y
-        Vowels have a weight greater chance, Y has a 2x vowel chance
-        '''
-        if not self.weighted_array:
-            #if empty create it
-            Y_WEIGHT = 2
-            if self.weight == 0:
-                self.weighted_array= ['vowels'] + ['Y'] * Y_WEIGHT + ['consonants']
-            else:
-                self.weighted_array= ['vowels'] * self.weight  + ['Y'] * (self.weight * Y_WEIGHT) + ['consonants']
-
-        return random.choice(self.weighted_array)
 
     def generate(self):
         '''
         Based on weighted random selection, pick a random from the correct list
         :return
         '''
-        selection= self.weighted_random_selection()
+        selection= self.select(['vowels','Y','consonants'],[self.weight,self.weight*self.y_weight,1])
         if selection == 'vowels':
-            result= random.choice(list(self.vowel_dictionary.keys()))
+            self.current_value= random.choice(list(self.vowel_dictionary.keys()))
         elif selection == 'consonants':
-            result= random.choice(list(self.letter_dictionary.keys()))
+            self.current_value= random.choice(list(self.letter_dictionary.keys()))
         else:
             # Value position of "Y"
-            result= 25
-        return result
+            self.current_value= 25
+        return self.current_value
 
 class CHALLENGE(object):
     def __init__(self,challenges,num_gen,letter_gen):
@@ -198,6 +191,6 @@ if __name__ == '__main__':
         sys.exit("prime_liklihood needs to be a positive integer")
 
     if args.vowels_likelihood < 0:
-        sys.exit("vowel liklihood needs to be a positive integer")
+        sys.exit("vowel liklihood needs to be a negative integer")
 
     main()

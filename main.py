@@ -191,6 +191,6 @@ if __name__ == '__main__':
         sys.exit("prime_liklihood needs to be a positive integer")
 
     if args.vowels_likelihood < 0:
-        sys.exit("vowel liklihood needs to be a negative integer")
+        sys.exit("vowel liklihood needs to be a positive integer")
 
     main()
